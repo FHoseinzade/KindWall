@@ -8,6 +8,7 @@ namespace WallProject.Models
 {
     public class Goods
     {
+        // error on here
         [Key]
         public int Id { get; set; }
 
