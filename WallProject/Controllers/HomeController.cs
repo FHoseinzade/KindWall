@@ -20,6 +20,7 @@ namespace WallProject.Controllers
         //    ViewBag.Parameter = countryName;
         //    return View();
         //}
+
         public ActionResult Index()
         {
             List<Goods> goods = context.Goods.OrderByDescending(g=>g.DateTime).Take(4).ToList();
