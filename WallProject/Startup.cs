@@ -30,13 +30,13 @@ namespace WallProject
 
                 // first we create Admin rool
                 var role = new Microsoft.AspNet.Identity.EntityFramework.IdentityRole();
-                role.Name = "admin@nazreno.com";
+                role.Name = "Admin";
                 roleManager.Create(role);
 
                 //Here we create a Admin super user who will maintain the website				
 
                 var user = new ApplicationUser();
-                user.UserName = "admin";
+                user.UserName = "admin@nazreno.com";
                 user.Email = "admin@nazreno.com";
 
                 string userPWD = "Admin20@";
