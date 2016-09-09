@@ -36,6 +36,8 @@ namespace WallProject.Models
         public DbSet<Request> Requests { get; set; }
         public DbSet<Wall> Walls { get; set; }
         public DbSet<Response> Responses { get; set; }
+        public DbSet<News> News { get; set; }
+        public DbSet<NewsCategory> NewsCategories { get; set; }
 
         public static ApplicationDbContext Create()
         {

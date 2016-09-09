@@ -264,11 +264,17 @@
     <Compile Include="Migrations\201608211842031_ConfirmWall.Designer.cs">
       <DependentUpon>201608211842031_ConfirmWall.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201609091547592_addNews.cs" />
+    <Compile Include="Migrations\201609091547592_addNews.Designer.cs">
+      <DependentUpon>201609091547592_addNews.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Goods.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\News.cs" />
+    <Compile Include="Models\NewsCategory.cs" />
     <Compile Include="Models\Request.cs" />
     <Compile Include="Models\Response.cs" />
     <Compile Include="Models\SearchViewModels.cs" />
@@ -797,6 +803,8 @@
     <Content Include="Areas\Admin\Views\Home\Index.cshtml" />
     <Content Include="Areas\Admin\Views\News\Index.cshtml" />
     <Content Include="Areas\Admin\Views\News\NewsList.cshtml" />
+    <Content Include="Areas\Admin\Views\News\AddNews.cshtml" />
+    <Content Include="Areas\Admin\Views\News\EditNews.cshtml" />
     <None Include="Areas\Users\Views\Requests\UnAnswaredRequests.cshtml" />
     <None Include="Areas\Users\Views\Responses\ResponseError.cshtml" />
     <Content Include="Areas\Users\Views\Walls\Create.cshtml" />
@@ -1170,6 +1178,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608211842031_ConfirmWall.resx">
       <DependentUpon>201608211842031_ConfirmWall.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201609091547592_addNews.resx">
+      <DependentUpon>201609091547592_addNews.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
