@@ -1,0 +1,50 @@
+﻿@model WallProject.Models.Response
+
+@{
+    ViewBag.Title = "پاسخ به درخواست";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+
+<br/>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    @Html.HiddenFor(model=>model.RequestId)
+    <div class="form-horizontal">
+        <h4>آیا با این درخواست موافقت میکنید؟</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        @Html.ValidationMessageFor(model=>model.Reply, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-offset-1 col-md-5">درخواست کننده: @Html.ViewBag.UserName</div>
+            <div class="col-md-6"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-1 col-md-5">نام کالا: @Html.ViewBag.GoodsTitle</div>
+            <div class="col-md-6"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-1 col-md-5">تعداد درخواستی: @Html.ViewBag.Count</div>
+            <div class="col-md-6"></div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-offset-1 col-md-5">زمان درخواست: @Html.ViewBag.DateTime</div>
+            <div class="col-md-6"></div>
+
+        </div>
+        
+        <hr/>
+        <div class="form-group">
+            <div class="col-md-offset-1 col-md-5">
+                <input name="answare" type="submit" value="بله" class="btn btn-success" style="width: 45%"/>
+                <input name="answare" type="submit" value="خیر" class="btn btn-danger" style="width: 45%"/>
+            </div>
+            <div class="col-md-6"></div>
+
+        </div>
+    </div>
+}

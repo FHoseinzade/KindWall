@@ -1,0 +1,113 @@
+﻿@using Microsoft.AspNet.Identity
+@using WallProject.Areas.Users.Models
+@using WallProject.Controllers
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title</title>
+    @*@Styles.Render("~/Content/css")*@
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/PersianDatePicker.js"></script>
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    <!--This bundle was moved by the Telerik VS Extensions for compatibility reasons-->
+
+    <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.common-bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.mobile.all.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.dataviz.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.dataviz.bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/kendo/2015.3.930/kendo.rtl.min.css")" rel="stylesheet" type="text/css"/>
+    <link href="~/Content/PersianDatePicker.css" rel="stylesheet" />
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.930/jquery.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.930/jszip.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.930/kendo.all.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo/2015.3.930/kendo.aspnetmvc.min.js")"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+
+    @*<script src="~/js/jquery-1.11.1.min.js"></script>*@
+    <script src="~/js/wow.min.js"></script>
+    <script src="~/js/jquery.flexisel.js"></script>
+
+    <link href='//fonts.googleapis.com/css?family=Alex+Brush' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Cabin:400,400italic,500,500italic,600,600italic,700,700italic' rel='stylesheet' type='text/css'>
+    <link href="~/css/animate.min.css" rel="stylesheet" />
+    <link href="~/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
+
+
+
+    <script>
+        new WOW().init();
+    </script>
+    <script src="~/Scripts/modal.js"></script>
+</head>
+
+<body class="k-rtl">
+<div class="header">
+    <div class="container" style="width: 80%">
+        <nav class="navbar navbar-default">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button data-target="#bs-example-navbar-collapse-1" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                    <span class="sr-only">تعویض ناوبری</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <div class="logo">
+                    @Html.ActionLink("نذر نوووو", "Index", new {Controller = "Home", area = ""}, new { @class = "navbar-brand", @style ="font-size: 2.5em" })
+                </div>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div id="bs-example-navbar-collapse-1" class="collapse navbar-collapse nav-wil">
+                <nav id="cl-effect-13" class="cl-effect-13">
+                    <ul class="nav navbar-nav">
+                        <li>@Html.ActionLink("صفحه اصلی", "Index", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("ثبت نذر جدید", "Create", "Goods", new { area = "Users" }, null)</li>
+                        <li>@Html.ActionLink("تازه ها", "News", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("معرفی دیوارهای مهربانی", "NazreNo", "Home", new { area = "" }, null)</li>
+                        <li>@Html.ActionLink("تماس با ما", "Contactus", "Home", new { area = "" }, null)</li>
+
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li style="color: white">سلام @Html.ActionLink(@ViewData["FullName"].ToString(), "Index", "Profiles", new { area = "Users" }, new { style = "padding-right: 5px;" })  [@Html.ActionLink("خروج", "Logout", "Account", new { area = "" }, new { style = "padding-right: 0;padding-left: 0;" })]</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("ورود", "Login", "Account", new { area = "" }, null)</li>
+                                <li>@Html.ActionLink("ثبت نام", "Register", "Account", new { area = "" }, null)</li>
+                        }
+                    </ul>
+                </nav>
+                @*<div class="social-icons">
+                    <ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li style="color: white">سلام @ViewData["FullName"] [@Html.ActionLink("خروج", "Logout", "Account", new { area = "" }, null)]</li>
+                        }
+                        else
+                        {
+                            <li>@Html.ActionLink("ورود", "Login", new { Controller = "Account" })</li>
+                        }
+                    </ul>
+                </div>*@
+            </div>
+            <!-- /.navbar-collapse -->
+        </nav>
+    </div>
+</div>
+
+<div class="col-md-3">
+    @Html.Action("ShowUserMenu", "Profiles")
+</div>
+    <div class="col-md-9">
+        @RenderBody()
+    </div>
+    @*@Scripts.Render("~/bundles/bootstrap")*@
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

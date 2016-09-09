@@ -1,0 +1,42 @@
+﻿@model WallProject.Models.Request
+
+<h3>آیا مایل به حذف درخواست زیر می باشید؟</h3>
+
+
+<div>
+    
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Goods)
+        </dt>
+        <dd>
+            @ViewBag.GoodsTitle
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Count)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Count)
+        </dd>
+    </dl>
+
+    @using (Ajax.BeginForm("Delete","Requests",FormMethod.Post,new AjaxOptions()
+    {
+        UpdateTargetId = "RequestList" ,
+        OnSuccess = "Success",
+        InsertionMode = InsertionMode.Replace
+
+
+    })) {
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="حذف" class="btn btn-danger" /> 
+           
+        </div>
+    }
+</div>

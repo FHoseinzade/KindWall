@@ -1,0 +1,23 @@
+﻿@model IEnumerable<WallProject.Areas.Users.Models.UserMenuViewModel>
+
+<div class="list-group" style="margin-top: 20px">
+    <b>
+        <a href="#" class="list-group-item list-group-item-success text-center">
+            پنل مدیریتی
+        </a>
+    </b>
+    @foreach (var item in Model)
+    {
+        @*@Html.ActionLink(@item.MenuTitle,"Index","Requests",routeValues:new {Area="Users"},
+       htmlAttributes:new {@class="list-group-item"})*@
+        <a href="/Users/@item.ControllerName/@item.ActionName" class="list-group-item @if (item.IsActive)
+                                                                                      {<text>active</text>}">
+            @item.MenuTitle
+            <label class="label label-warning pull-left">@item.Count</label>
+        </a>
+    }
+    <a href="Users/Settings/Index" class="list-group-item">
+        تنظیمات
+        @*<label class="label label-warning pull-left">@item.Count</label>*@
+    </a>
+</div>

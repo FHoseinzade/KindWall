@@ -1,0 +1,57 @@
+﻿
+@{
+    ViewBag.Title = "درخواست های شما";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+<br/>
+
+<div id="RequestList">
+    @Html.Action("ShowList")
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+            </div>
+            <div class="modal-body" id="BodyModal" style="overflow: hidden">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+@section scripts
+{
+<script src="~/Scripts/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function Edit(id) {
+            $.ajax({
+                url: "/Users/Requests/Edit/" + id,
+                type: "Get"
+            }).done(function (result) {
+                $("#myModal").modal();
+                $("#myModalLabel").html("ویرایش درخواست");
+                $("#BodyModal").html(result);
+            });
+        }
+        function Delete(id) {
+            $.ajax({
+                url: "/Users/Requests/Delete/" + id,
+                type: "Get"
+            }).done(function (result) {
+                $("#myModal").modal();
+                $("#myModalLabel").html("حذف درخواست");
+                $("#BodyModal").html(result);
+            });
+        }
+        function Success() {
+            $("#myModal").modal("hide");
+          
+        }
+    </script>
+}

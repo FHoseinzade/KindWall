@@ -1,0 +1,105 @@
+﻿@using Kendo.Mvc.UI
+@model WallProject.Models.Goods
+
+@{
+    ViewBag.Title = "ویرایش";
+    Layout = "~/Views/Shared/_MyLayout.cshtml";
+}
+
+<br/>
+<div class="col-md-2"></div>
+<div class="col-md-8">
+    <h2>
+        ویرایش
+    </h2>
+    <br/>
+    @using (Html.BeginForm())
+    {
+        @Html.HiddenFor(model=>model.PictureName)
+        @Html.HiddenFor(model=>model.OwnerUser_Id)
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+
+            @Html.ValidationSummary(true, "", new {@class = "text-danger"})
+            @Html.HiddenFor(model => model.Id)
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Title, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.TextBoxFor(model => model.Title, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Title, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Description, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Description, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Description, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.PictureName, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.Picture, new {htmlAttributes = new {@class = "form-control"}})*@
+                    @Html.Kendo().Upload().Name("myPic").Multiple(false)
+
+                    <br/>
+
+                    <img src="/IMG/@Model.PictureName" alt="بدون عکس" class="thumbnail" width="120" />
+
+                    @Html.ValidationMessageFor(model => model.PictureName, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.DateTime, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @*@Html.EditorFor(model => model.DateTime, new {htmlAttributes = new {@class = "form-control"}})*@
+                    @(Html.Kendo().DatePicker()
+                          .Name("DateTime")
+                          .HtmlAttributes(new { style = "width:150px" }))
+                    @Html.ValidationMessageFor(model => model.DateTime, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.Count, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    @Html.EditorFor(model => model.Count, new {htmlAttributes = new {@class = "form-control"}})
+                    @Html.ValidationMessageFor(model => model.Count, "", new {@class = "text-danger"})
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.CanSend, htmlAttributes: new {@class = "control-label col-md-2"})
+                <div class="col-md-10">
+                    <div class="checkbox">
+                        @Html.EditorFor(model => model.CanSend)
+                        @Html.ValidationMessageFor(model => model.CanSend, "", new {@class = "text-danger"})
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="ذخیره" class="btn btn-default"/>
+                </div>
+            </div>
+        </div>
+    }
+    <div>
+        @Html.ActionLink("بازگشت به لیست", "Index")
+    </div>
+
+</div>
+<div class="col-md-2"></div>
+<script>
+        $(function() {
+            $("input[type=text],input[type=submit]").addClass("form-control");
+        });
+</script>

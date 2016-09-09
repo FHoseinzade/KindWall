@@ -1,0 +1,32 @@
+﻿@using Kendo.Mvc.UI
+@model IEnumerable<WallProject.Models.Request>
+
+
+@(Html.Kendo().Grid(Model)
+      .Name("grid")
+      .Columns(columns =>
+      {
+          columns.Bound(c => c.Goods.Title).Width(240);
+          columns.Bound(c => c.Count).Width(190);
+          columns.Bound(c => c.DateTime);
+          columns.Bound(c => c.Id).Title("عملیات").Template(
+              @<text>
+                  <a class="btn btn-warning" onclick="Edit(@item.Id)">
+                      <i class="glyphicon glyphicon-edit"></i>
+                  </a>
+                  <a class="btn btn-danger" onclick="Delete(@item.Id)">
+                      <i class="glyphicon glyphicon-trash"></i>
+                  </a>
+               </text>)
+              .Filterable(false).Groupable(false);
+      })
+      .HtmlAttributes(new {style = "height: 550px;"})
+      .Scrollable()
+      .Groupable()
+      .Sortable()
+      .Pageable(pageable => pageable
+          .Refresh(true)
+          .PageSizes(true)
+          .ButtonCount(5))
+      .DataSource(dataSource => dataSource.Server().Model(model => model.Id(item => item.Id)))
+      )

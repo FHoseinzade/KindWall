@@ -1,0 +1,35 @@
+﻿@using Kendo.Mvc.UI
+@model System.Collections.Generic.List<WallProject.Models.Request>
+
+@{
+    ViewBag.Title = "درخواست های پاسخ داده نشده";
+    Layout = "~/Views/Shared/_ProfileLayout.cshtml";
+}
+<br/>
+@(Html.Kendo().Grid(Model)
+      .Name("Grid")
+      .Columns(columns =>
+      {
+          columns.Bound(item => @item.Id).Filterable(false).Groupable(false).Template(@<text>
+                                                                                          <img src="/IMG/@item.Goods.PictureName" alt="بدون عکس" class="thumbnail center-block" width="150"/>
+                                                                                       </text>).Title("عکس").Width(200);
+          columns.Bound(model => model.OwnerUser.Name).Title("نام درخواست کننده").HtmlAttributes(new {@class="text-center"});
+          columns.Bound(model => model.DateTime).Format("{0:yyyy/MM/dd - dddd}").Title("زمان درخواست").HtmlAttributes(new { @class = "text-center" });
+          columns.Bound(model => model.Count).Width(100).HtmlAttributes(new {@class="text-center"});
+          columns.Bound(model => model.Goods.Title).Title("کالای مورد درخواست").HtmlAttributes(new { @class = "text-center" });
+          columns.Bound(item => @item.Id).Title("دستورات").Filterable(false).Groupable(false).HtmlAttributes(new { @class = "text-center" })
+              .Template(@<text>
+
+                            @Html.ActionLink("پاسخ", "Create", "Responses", new {id = @item.Id}, new {@class = "k-button k-button-icontext btn-info"})
+                         </text>).Width(150);
+      })
+      .Groupable()
+      .Pageable()
+      .Sortable()
+      .Scrollable()
+      .Filterable()
+      .DataSource(dataSource => dataSource
+          .Server()
+          .Model(model => model.Id(item => item.Id))
+      ).HtmlAttributes(new {@style="height:550px;"})
+      )
